@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>Start</title>
+        <meta charset="UTF-8" />
+    </head>
+
+    <body>
+        <!-- 메인 포인터 -->
+        <div id="message2">
+            <p>{{ message2 }}</p>
+        </div>
+
+        <div id="bind_V">
+            <span v-bind:title="message4">
+                내 위에 잠시 마우스를 올리면 동적으로 바인딩 된 title을 볼 수 있습니다!
+            </span>
+        </div>
+
+
+
+        <!-- Vue.js 개발버전 -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        
+        <!-- Vue.js 코드 -->
+        <script>
+
+            // Message Change 
+            var message = new Vue({
+                el: '#message2',
+                data: {
+                    message1: 'Hello Vue.js!',
+                    message2: 'Change Message'
+                }
+            })
+            message.message1 = message.message2;
+
+            // Binding Action
+            var bind = new Vue({
+                el: '#bind_V',
+                data: {
+                    message4: '이 페이지는 ' + new Date() + ' 에 로드 되었습니다.'
+                }
+            })
+            bind.message4 = "바인드 액션의 문구를 교체합니다.";
+
+
+            
+        </script>
+    </body>
+
+</html>

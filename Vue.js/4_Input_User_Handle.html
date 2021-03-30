@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>User Input Handling</title>
+        <meta charset="UTF-8">
+
+    </head>
+
+    <body>
+        <!-- HTML 요소-->
+        <div id="user_handle">
+            <p>{{ message }}</p>
+        </div>
+
+
+
+
+
+
+        <!-- Vue.js를 사용할 수 있도록, 선언하는 코드 -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        
+        <!-- JavaScript와 Vue.js 코드를 작성하는 공간-->
+        <script>
+            var user_Input = new Vue({
+                el: '#user_handle',
+                data: {
+                    message: '안녕하세요! Vue.js!'
+                },
+                methods: {
+                    reverseMessage: function() {
+                        this.message = this.message.split('').reverse().join('');
+                    }
+                }
+            });
+        
+            console.log("Test");
+            
+        </script>
+    </body>
+</html>

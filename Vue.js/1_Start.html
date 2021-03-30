@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>Start</title>
+        <meta charset="UTF-8" />
+    </head>
+
+    <body>
+        <div id="message">
+            <p>{{message}}</p>
+        </div>
+
+        <!-- Vue.js 개발버전 -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        
+        <!-- Vue.js 코드 -->
+        <script>
+            var message = new Vue({
+                el: '#message',
+                data: {
+                    message: 'Hello Vue.js!'
+                }
+            })
+
+            message.message = 'Change Message';
+            
+        </script>
+    </body>
+
+</html>

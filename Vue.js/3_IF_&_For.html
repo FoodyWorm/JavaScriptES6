@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>IF & For</title>
+
+    </head>
+
+    <body>
+        <!-- HTML 요소-->
+        <div id="if">
+            <p v-if="seen">이제 나를 볼 수 있어요</p>
+        </div>
+
+        <div id="for">
+            <ol>
+                <li v-for="todo in todos">
+                    {{ todo.text }}
+                </li>
+            </ol>
+            
+        </div>
+
+
+
+        <!-- Vue.js사용을 선언 -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        
+        <!-- JavaScirpt 및 Vue.js 코드 작성-->
+        <script>
+            // if문 (보이게 하기 or 안보이게 하기)
+            var logic_if = new Vue({
+                el: '#if',
+                data: {
+                    seen: true
+                }
+            })
+            logic_if.seen = false;
+
+            // for문을 사용하여, 리스트를 보여주기
+            var logic_for = new Vue({
+                el: '#for',
+                data: {
+                    todos: [
+                        { text: 'JavaScript 배우기'},
+                        { text: 'Vue 배우기'},
+                        { text: '무언가 멋진 것을 만들기'}
+                    ]
+                }
+            })
+
+
+        </script>
+    </body>
+</html>
