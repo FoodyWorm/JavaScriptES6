@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>Vue Instance</title>        
+        <meta charset="UTF-8">
+    </head>
+
+    <body>
+        <!-- data Component -->
+        <div id="data">
+            <h1>{{ a }}</h1>
+        </div>
+
+        <!-- Object.freeze() - App Test -->
+        <div id="app">
+            <h1>{{ foo }}</h1>
+            <!-- obj.foo는 더 이상 변하지 않습니다. -->
+            <button v-on:click="foo='bazzzz'">Change it</button>
+        </div>
+
+        <!-- Vue Instances & Methods feat.$ -->
+        <div id="example">
+            <h1>{{ a }}</h1>
+        </div>
+        
+
+        
+
+
+        <!-- Vue.js를 사용할 수 있도록, 선언하는 코드 -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+        <!-- JavaScript와 Vue.js 코드를 작성하는 공간 -->
+        <script>
+            // 데이터 객체
+            var data1 = { a:1 }
+            
+            // Vue 인스턴스에 데이터 객체를 추가합니다.
+            var vm = new Vue({
+                el: '#data',
+                data: data1
+            });
+
+            // 인스턴스에 있는 속성은
+            // 원본 데이터에 있는 값을 반환합니다.
+            console.log(vm.a === data1.a); // => true
+            
+            // 인스턴스에 있는 속성값을 변경하면
+            // 원본 데이터에도 영향을 미칩니다.
+            vm.a = 2;
+            console.log(data1.a); // => 2  ("정말 놀랍네요.. ㄷㄷ")
+
+            // . . . 반대로 마찬가지입니다.
+            data1.a = 3;
+            console.log(vm.a); // => 3
+
+            // 하지만, Data를 바꾸게 될 경우, 기존의 인스턴스만 바뀌지 바뀐 인스턴스는 적용이 되지 않음.
+            data1.b = "change Data";
+            console.log(vm.b);
+
+            // 빈 값이거나, 존재하지 않은 상태로 시작한다면 아래와 같이 초기값을 지정할 필요가 있음.
+            var data2 = {
+                newTodoText: '',
+                visitCount: 0,
+                hideCompletedTodos: false,
+                todos: [],
+                error: null
+            }
+
+            // 여기에서 유일한 예외는 Object.freeze()를 사용하는 경우입니다. 이는 기존 속성이 변경되는 것을 막아
+            // 반응형 시스템이 추적할 수 없다는 것을 의미합니다.
+            var obj = {
+                foo: 'bar'
+            }
+
+            // 반응형 제거 메소드
+            Object.freeze(obj);
+
+            new Vue({
+                el: '#app',
+                data: obj
+            })
+
+            // Vue 인스턴스는 데이터 속성 이외에도 유용한 인스턴스 속성 및 메소드를 제공합니다.
+            // 다른 사용자 정의 속성과 구분하기 위해 '$'접두어를 붙였습니다.
+            var data = { a: 1}
+            var vm = new Vue({
+                el: '#example',
+                data: data
+            })
+
+            console.log(vm.$data === data); // => true
+            console.log(vm.$el === document.getElementById('example')); // => true
+
+            // $watch는 인스턴스 메소드 입니다. (데이터 값, 변경 시 호출되는 메소드)
+            vm.$watch('a', function (newVal, oldVal) {
+                // 'vm.a'가 변경되면 호출됩니다.
+                console.log("호출되었습니다.");
+            })
+
+            vm.a = 2;
+            
+        
+
+
+        </script>        
+    </body>
+</html>

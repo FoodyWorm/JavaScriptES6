@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>Vue Instance</title>        
+        <meta charset="UTF-8">
+    </head>
+
+    <body>
+        <!-- HTML 요소-->
+        <div id="app">
+            <h1>{{ a }}</h1>
+        </div>
+
+        
+
+
+        <!-- Vue.js를 사용할 수 있도록, 선언하는 코드 -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+        <!-- JavaScript와 Vue.js 코드를 작성하는 공간 -->
+        <script>
+           new Vue({
+                el: '#app',
+                data: {
+                    a: 1
+                },
+                created: function() {
+                    // 'this'는 vm 인스턴스를 가리킵니다.
+                    console.log('a is: ' + this.a);
+                }
+           })
+           // 추 후에 더 테스트를 해봐야 알 수 있을 것 같음.
+
+        </script>        
+    </body>
+</html>

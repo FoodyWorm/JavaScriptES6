@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>Using Components</title>        
+        <meta charset="UTF-8">
+    </head>
+
+    <body>
+        <!-- HTML 요소-->
+        <!-- 첫번째, 할일 목록 -->
+        <div id="component1">
+            <li>{{ message }}</li>
+            
+            <!-- 두번째, 할일 목록 / todo-item 컴포넌트의 인스턴스 만들기 -->
+            <todo-item2></todo-item2>
+        </div>
+
+        
+
+
+        <div id="component2">
+            <ol>
+                <todo-item2 v-for="item in groceryList" v-bind:todo="item" v-bind:key="item.id">
+                </todo-item2>
+            </ol>
+        </div>
+
+        
+
+
+        <!-- Vue.js를 사용할 수 있도록, 선언하는 코드 -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+        <!-- JavaScript와 Vue.js 코드를 작성하는 공간 -->
+        <script>
+            // <todo-item2></todo-item2> 라는 컴포넌트를 생성. (단, 이 컴포넌트는 자식 컴포넌트에게 데이터 전달이 가능하다.)
+            Vue.component('todo-item2', {
+                props: ['todo'],
+                template: '<li>{{ todo.text }}</li>'
+            })
+
+            // 자식 컴포넌트에 반복할 데이터 값과 키를 입력
+            var todo_items = new Vue({
+                el: '#component2',
+                data: {
+                    groceryList: [
+                        { id: 0, text: 'Vegetables'},
+                        { id: 1, text: 'Cheese'},
+                        { id: 2, text: 'Whatever else humans are supposed to eat'}
+                    ]
+                }
+            })
+
+    
+
+            // 첫번째, 컴포넌트에 연결하여 메시지를 입력.
+            var test = new Vue({
+                el: '#component1',
+                data: {
+                    message: "첫번째, 할일 목록"
+                }
+            })
+
+            // 컴포넌트는 항상, 가장 먼저 생성하여 주는 것이 좋다. 이유는 순서를 바꿔보면, 알 수 있다. //
+        </script>        
+    </body>
+</html>
