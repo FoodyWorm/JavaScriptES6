@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>Vue Instance</title>        
+        <meta charset="UTF-8">
+    </head>
+    <style>
+        body{
+            margin: 25px;
+            padding: 25px;
+            border: 3px solid black;
+        }
+        h2{ 
+            margin-bottom: 0px; 
+        }
+
+    </style>
+
+    <body>
+        <!------------------------------------------------------------------------------------------------------------->
+        <!-- 
+            - 템플릿 문법 -
+            Vue.js는 덴더링 된 DOM을 기본 Vue 인스턴스의 데이터에 선언적으로 바인딩 할 수 있는 HTML 기반 템플릿 구문을 사용합니다.
+            모든, Vue.js 템플릿은 스펙을 호환하는 브라우저 및 HTML 파서로 구문 분석할 수 있는 유효한 HTML입니다.
+
+            내부적으로 Vue는 템플릿을 가상 DOM 렌더링 함수로 컴파일 합니다. 반응형 시스템과 결합된 Vue는 앱 상태가
+            변경 될 때 최소한으로 DOM을 조작하고 다시 적용할 수 있는 최소한의 컴포넌트를 지능적으로 파악할 수 있습니다.
+
+            가상 DOM 개념에 익숙하고 JavaScript의 기본 기능을 선호하는 경우 템플릿 대신 렌더링 함수를 직접 작성할 수 있으며 선택사항으로 JSX를 지원합니다.
+        -->
+        <!-- 보간법(Interpolation) 이란? 기존의 데이터지점에서 새로운 데이터 지점으로 이동하는 방법 -->
+        <!-- 이중 중괄호 {{ }}를 Mustache 라고 부릅니다.-->
+
+            <!-- (1) 문자열: 데이터 바인딩의 가장 기본이 되는 텍스트 보간법 -->
+            <h2>(1) 문자열</h2>
+            <div id="text1">
+                <span>메시지: {{ msg }}</span>
+            </div>
+            <!-- 보간을 1회만 하도록 하려면, v-once 디렉티브를 사용 -->
+            <div id="text2">
+                <span v-once>고정메시지: {{ msg }}</span>
+            </div>
+
+
+            <!-- (2) 원시 HTML: 문자열 보간이 되지 않고, 순수한 HTML로 랜더링 되도록 하는 보간법 -->
+            <h2>(2) 원시 HTML</h2>
+            <div id="Vue_Text">
+                Vue Text: {{ msg }}
+            </div>
+
+            <div id="HTML_Text">
+                HTML Text:
+                <!-- HTML Text: <span v-html="rawHtml">{{ msg }}</span> -->
+            </div>
+
+
+            <!-- (3) 속성(Attribute): 이중 중괄호(Mustaches)는 HTML 속성에서 사용 불가능. 대신, v-bind 디렉티브를 사용. -->
+            <h2>(3) 속성(Attribute)</h2>
+            <div id="nomal_Id">Nomal_Id: </div>
+            <div v-bind:id="dynamic_Id">Dynamic_Id: </div>
+
+
+            <!-- (4) JavaScript 표현식 사용 -->
+            <h2>(4) JavaScript 표현식 사용</h2>
+            <div id="test1">
+                JavaScript 표현식: 
+                Number: {{ number + 1 }}, 
+                IF: {{ ok ? 'YES' : 'NO' }}, 
+                Message: {{ msg }}
+                <br />
+            </div>
+
+            불가능한 JavaScript 표현식:
+            {{ var a = 1 }}
+            {{ if(ok) { return message }}}
+
+
+            <!-- (5) 디렉티브(Directive) -->
+             <h2>(5) 디렉티브(Directive)</h2>
+             <div id="if">
+                v-if="seen": true or false
+                <p v-if="seen">보이게 되었어요!</p>
+                <p v-else>안보이게 되었어요..ㅠㅠ</p>
+            </div>
+
+
+            <!-- (6) 전달인자와 수신인자 -->
+            <h2>(6) 전달인자와 수신인자</h2>
+            <div id="send_get">
+                전달인자: <a v-bind:href="url" target="_blank">Go Naver</a>, 
+                수신인자: <a v-on:click="change_Url">Change_URL</a>
+            </div>
+
+
+            <!-- (7) 동적 전달인자: 현재, 공식사이트에는 공표되지 않은 오류가 존재함. 저 아규멘트에 명칭은 단일명으로 해야함. 대문자가 들어가면 안됨. -->
+            <h2>(7) 동적 전달인자</h2>
+            <div id="site">
+                동적 전달인자: <a v-bind:[attributename]="url" target="_blank">Go Site</a>
+            </div>
+
+
+            <!-- (8) 수식어(Modifier) -->
+            <h2>(8) 수식어(Modifier)</h2>
+            <div id="modifier">
+                - 수식어 사용 - <div v-on:click.prevent="doThat"><button>Click Modifier</button></div>
+            </div>
+
+
+            <!-- (9) 약어(Abbreviations) -->
+            <h2>(9) 약어(Abbreviations)</h2>
+            <div id="Abbreviations">
+                - 약어 사용 - <div @click.prevent="doThat"><button>Click Modifier</button></div>
+            </div>
+
+           
+
+        <!------------------------------------------------------------------------------------------------------------->
+
+
+
+        <!-- Vue.js를 사용할 수 있도록, 선언하는 코드 -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+        <!-- JavaScript와 Vue.js 코드를 작성하는 공간 -->
+        <script>
+            //////////////////////////////// (1) 문자열 보간 /////////////////////////////
+            // vm_Text1: 안녕하세요?
+            var vm_Text1 = new Vue({
+                el: '#text1',
+                data: {
+                    msg: "안녕하세요?"
+                }
+                
+            });
+
+            // vm_Text2: 안녕하세요? 김장은입니다.
+            var vm_Text2 = new Vue({
+                el: '#text2',
+                data: {
+                    msg: "안녕하세요? 김장은입니다."
+                }
+            })
+
+            // vm_Text1, vm_Text2 -> change: Hello? / Hello? My Name is KimJangeun
+            vm_Text1.msg = "Hello?";
+            vm_Text2.msg = "Hello? My Name is KimJangeun";
+
+            ////////////////////////////////////////////////////////////////////////////
+
+
+            //////////////////////////////// (2) 원시 HTML /////////////////////////////
+            // vm_Text: 뷰 텍스트
+            var vm_Text = new Vue({
+                el: "#Vue_Text",
+                data: {
+                    msg: "뷰 텍스트"
+                }
+            })
+ 
+            // html_Text: {{ msg }} 이렇게 나올 줄 알았는데, 적어도 안보이게는 해줌.
+            var html_Text = new Vue({
+                el: '#HTML_Text',
+                data:{
+                    msg: "HTML 텍스트"
+                }
+            })            
+
+            // 이러한 보간법들은 ! 절 ! 대 ! 로 ! 신뢰할 수 있는 콘텐츠에서만 사용해야함. [XSS 취약점]
+            ////////////////////////////////////////////////////////////////////////////
+
+
+            ////////////////////////////// (3) 속성(Attribute) /////////////////////////
+            // 일반 HTML의 속성 Id
+            var nomal_Id = document.querySelector('#nomal_Id')
+            nomal_Id.appendChild(document.createTextNode("Set Text"));
+
+            // Vue의 속성 Id
+            var dynamic_Id = document.querySelector('#dynamic_Id');
+            //dynamic_Id.appendChild(document.createTextNode("Set Text")); // Vue 속성의 v-bind:id 는 일반적으로 사용이 불가능함.
+
+            ////////////////////////////////////////////////////////////////////////////
+
+
+            ///////////////////////////// (4) JavaScript 표현식 ////////////////////////
+            // Vue 인스턴스를 생성하여, {{ }}에 Vue 표현식을 적용.
+            var vm = new Vue({
+                el: '#test1',
+                data: {
+                    number: 10,
+                    ok: true,
+                    msg: 'test'
+                }
+            })
+
+            ///////////////////////////////////////////////////////////////////////////
+
+
+            //////////////////////////////// (5) 디렉티브 //////////////////////////////
+            // Vue 인스턴스를 사용하여, v-if="seen"에 논리값을 적용.
+            var vm_if = new Vue({
+                el: '#if',
+                data: {
+                    seen: true
+                }
+            })
+
+            ///////////////////////////////////////////////////////////////////////////
+
+
+            //////////////////////////// (6) 전달인자와 수신인자 ////////////////////////
+            // 전달인자와 수신인자
+            new Vue({
+                el: '#send_get',
+                data: {
+                    url: 'https://www.naver.com/'
+                },
+                methods: {
+                    change_Url: function(){
+                        this.url = 'http://www.daum.net'
+                    }
+                }
+            })
+
+            ///////////////////////////////////////////////////////////////////////////
+
+
+            ////////////////////////////// (7) 동적 전달인자  //////////////////////////
+            // 동적 전달인자
+            new Vue({
+                el:'#site',
+                data: {
+                    url: 'https://www.naver.com/',
+                    attributename: 'href'
+                }
+            })
+          
+
+            ///////////////////////////////////////////////////////////////////////////
+
+
+            ////////////////////////////////// (8) 수식어  ////////////////////////////
+            // 수식어
+            new Vue({
+                el:'#modifier',
+                data: {
+                    doThat: () => {
+                        alert("Wow!");
+                    }
+                    
+                }
+            })
+          
+
+            //////////////////////////////////////////////////////////////////////////
+
+
+            ////////////////////////////////// (9) 약어  ////////////////////////////
+            // 약어
+            new Vue({
+                el:'#Abbreviations',
+                data: {
+                    doThat: () => {
+                        alert("v-on: -> @");
+                    }
+                    
+                }
+            })
+          
+
+            //////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+        </script>        
+    </body>
+</html>
