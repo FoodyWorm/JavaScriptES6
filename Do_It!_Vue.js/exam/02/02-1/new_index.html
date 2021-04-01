@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>New Vue.js</title>
+    </head>
+    <body>
+        <!-- MVVM모델 -->
+        <!-- View(DOM) -->
+        <div id="app">
+            <p>{{ message }}</p>
+        </div>
+
+        <!-- View Model(DOM Listener / Data Binding) -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+        <!-- Model(JavaScript Objects) -->
+        <script>
+            new Vue({
+                el: '#app',
+                data: {
+                    message: "Hello Vue.js!"
+                }
+            })
+        </script>
+    </body>
+</html>
