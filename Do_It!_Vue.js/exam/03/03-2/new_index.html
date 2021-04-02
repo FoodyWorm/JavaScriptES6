@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>View Instance & Lifecycle</title>
+        <meta charset="utf-8">
+
+    </head>
+
+    <body>
+        <!-- View(DOM) -->
+        <div id='app'>
+            {{ message }}
+        </div>
+
+
+        <!-- View Model(Vue) -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+        
+        <!-- Model(JavaScript) -->
+        <script>
+            // 충격적인 사실은 Vue인스턴스(옵션)에서는 화살표 표기법이 적용이 안된다는 것. //
+            // beforeUpdate와 updated를 잘 못 사용하면, 무한루프가 형성될 수 있다... //
+        
+        new Vue({
+            el: '#app',
+            data: {
+                message: "Do it! Vue.js~!"
+            },
+            beforeCreate: function() {
+                console.log("beforeCreate");
+            },
+            created: function() {
+                console.log("create");
+            },
+            beforeMount: function() {
+                console.log("beforeMount");
+            },
+            mounted: function() {
+                console.log("mounted");
+            },
+            beforeUpdate: function() {
+                console.log("beforeUpdate");
+            },
+            updated: function() {
+                console.log("updated");
+            },
+            beforeDestroy: function() {
+                console.log("beforeDestroy");
+            },
+            destroy: function() {
+                console.log("destroy");
+            }
+        })
+
+
+        </script>
+
+    </body>
+</html>

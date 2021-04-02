@@ -9,7 +9,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
     <script>
-      new Vue({
+      var vm = new Vue({
         el: '#app',
         data: {
           message: 'Hello Vue.js!'
@@ -20,13 +20,69 @@
         created: function() {
           console.log("created");
         },
+        beforeMount: function() {
+          console.log("beforeMount");
+        },
         mounted: function() {
           console.log("mounted");
         },
+        beforeUpdate: function() {
+          console.log("beforeUpdate");
+        },
         updated: function() {
           console.log("updated");
+        },
+        beforeDestroy: function() {
+          console.log("beforeDestroy");
+        },
+        destroy: function() {
+          console.log("destroy");
         }
+
       });
+      vm.message = "test";
+      console.log(vm);
+      console.log(vm.data);
+      console.log(vm.messgae);
+      // Vue인스턴스에서 데이터를 가져올 수는 없지만, 업데이트는 가능하다.
+      // 그렇다면, 데이터를 가져오고 싶다면... querySelect뿐인듯?
+      var app = document.querySelector('#app');
+      console.log(app.textContent); // 가져올 수 있다!
+      var getText = app.textContent;
+
+      // 결과는 대성공이다. 하지만, 아이러니하게도, 가져온 데이터는 공백을 포함한 희한한 형태로 왔다.
+      // 배열의 길이를 측정하여 확인해보자. 혹시 모르니 데이터 타입도 확인하자.
+      console.log(getText.length); // 25
+      console.log(typeof(getText)); // string
+
+      // 길이는 무려 25... 즉, "Hello Vue.js!"가 13개인데.. 약 12개의 공백이 들어갔다.
+      // 만약, 이런식으로 데이터를 가져와서 사용하고 싶다면, 공백을 제거하는 split() 배열 함수를 사용해야 할 것 같다.
+      console.log(getText.split(' ')); // 12개의 배열만 남기게 되었다.
+      getText = getText.split(' ');
+      console.log(getText); // 하지만 완전히, 제거된 것은 아니다. 알고보니, Hello와 Vue.js! 값이 각각 들어있던 것... 그렇다면?
+      
+      // 데이터가 없는 배열을 삭제하는 함수를 사용하자. 그러기 위해서는 find() 혹은 filter() 함수를 사용해야한다.
+      const newText = getText.filter(
+        (element, i) => element != 0 
+      )
+      
+      newText.forEach((e, i) => {
+        document.write(i + " : " + e + '<br>');
+      })
+      // 0: Hello
+      // 1: Vue.js!
+      
+
+      // 원리는 이해하지 못했다.. 하지만 성공!
+      // 여기서, 중요한 것은 vm.message로 데이터 바인딩을 하였음에도 불구하고, 실제 Vue인스턴스에서는 데이터가 바뀌지 않았다.
+      console.log(newText); // 추출한 데이터
+      console.log(vm.message); // Vue를 인스턴스화 하여 만든 vm의 message
+      
+      // 데이터를 가져오고 나서, 실제 Vue인스턴스에서도 데이터가 바뀌도록 하려면 어떻게 해야할까?
+      // vm.data / vm.data.message / vm.message 모두 데이터를 참조하거나 변경이 불가능하다.
+      // 아마, 이러한 문제점을 해결하기 위해서 탄생한 것이 "양방향 데이터 바인딩"이 아닐까 싶다.. 연구는 여기서 그만하고 진도를 나가자.
+
+
     </script>
   </body>
 </html>

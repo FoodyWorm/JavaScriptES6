@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>Area View Component</title>
+    </head>
+    
+    <body>
+        <!-- View(DOM) -->
+        <header id="header">
+            - 지역 컴포넌트 -
+            <vue></vue>
+        </header>
+
+        <!-- View Model(Vue.js) -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+
+        <!-- Model(JavaScript) -->
+        <script>
+            var header = {
+                // Component Contents // 놀라운 사실은.. 태그가 없으면, 값이 적용돠지 않는다.
+                // 즉, 데이터 값만 넣을 수는 없다는 것이다.
+                template: '<p>Area View Component</p>'
+            }
+
+            new Vue({
+                el: '#header',
+                data: {
+
+                },
+                components: {
+                    'vue': header
+                }
+            })
+        </script>
+
+    </body>
+</html>

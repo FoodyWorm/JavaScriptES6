@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>What Difference? Global or Area</title>
+        <meta charset="utf-8">
+
+    </head>
+    
+    <body>
+        <!-- View (DOM) -->
+        <div id="first">
+            <h3>첫 번째 인스턴스 영역</h3>
+            <global></global>
+            <local></local>
+        </div>
+
+        <div id="second">
+            <h3>두 번째 인스턴스 영역</h3>
+            <global></global>
+            <local></local>
+        </div>
+
+
+        <!-- View Model (Vue.js) -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+        <script>
+            Vue.component('global', {
+                template: '<p>global</p>'
+            });
+
+            new Vue({
+                el: '#first',
+                components: {
+                    'local': { 
+                        template: '<p>local</p>'
+                    }
+                }
+            });
+
+            // 인스턴스를 생성해서 적용하지 않으면, Vue기능은 무용지물인듯 하다.
+            // 즉, HTML Element(id) 와 new Vue({el: id})는 필수적인 것.
+            new Vue({
+                el: '#second'
+            })
+        </script>
+    </body>
+</html>

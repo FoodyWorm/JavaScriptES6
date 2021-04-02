@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Global View Component</title>
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <!-- View(DOM) -->
+        <div id="vue">
+            JavaScript Test: <vue></vue>
+        </div>
+
+        <!-- View Model(Vue.js) -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+        
+        <!-- Model(JavaScript) -->
+        <script>
+        var test = 1;
+        Vue.component('vue', {
+            template: '<div>' + test + '</div>'
+
+        })
+
+        new Vue({
+            el: '#vue'
+            
+        })
+        </script>
+    </body>
+</html>

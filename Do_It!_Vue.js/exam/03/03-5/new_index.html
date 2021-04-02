@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>Global-Component & Local-Component</title>
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <!-- View(DOM) -->
+        <div id="first">
+            - 글로벌 컴포넌트 - 
+            <global></global>
+            <br />
+            - 로컬 컴포넌트 - 
+            <local></local>
+        </div>
+
+        <div>
+            <global></global>
+        </div>
+
+     
+    
+
+
+        <!-- View Model(Vue.js) -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+
+        <!-- Model(JavaScript) -->
+        <script>
+            // 전역 컴포넌트
+           Vue.component('global', {
+                template:  '<p>Global Component</p>'
+           })
+
+
+            // 지역 컴포넌트
+            new Vue({
+                el: '#first',
+                components: {
+                    'local': {
+                        template: '<p>Local Component</p>'
+                    }
+                }
+            })
+
+
+        </script>
+    </body>
+</html>

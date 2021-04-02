@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>Vue Instance</title>
+        <meta charset="utf-8">
+
+    </head>
+
+    <body>
+        <!-- View(DOM) -->
+        <div id="app">
+            {{ message }}
+        </div>
+
+
+
+        <!-- View Model(Vue) -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+        
+        <!-- Model(JavaScript) -->
+        <script>
+            // 충격적인 사실은 Vue인스턴스(옵션)에서는 화살표 표기법이 적용이 안된다는 것. //
+            // beforeUpdate와 updated를 잘 못 사용하면, 무한루프가 형성될 수 있다... //
+            new Vue({ // Vue인스턴스 초기화 및 el과 id값을 매칭...
+                el: "#app",
+                data: {
+                    message: "Do it! Vue.js"
+                },
+                beforeCreate: function() { // Vue인스턴스 생성 전... (data, methods 등)
+                    console.log("beforeCreate");
+                },
+                created: function() { // Vue인스턴스 생성 후... (data, methods 등)
+                    console.log("created");
+                },
+                beforeMount: function() { // Vue인스턴스 적용 전... (연결된 id에 준비된 Vue 적용 전...)
+                    console.log("beforeMount");
+                    this.message = 'Hello Vue';
+                },
+                mounted: function() { // Vue인스턴스 적용 후... ( 연결된 id에 준비된 Vue 적용 후...)
+                    console.log("mounted");
+                    this.message = 'Hello Vue!';
+                },
+                beforeUpdate: function() { // 데이터 변경 시에 업데이트 되기 전... 
+                    console.log("beforeUpdate");
+                    //this.message = 'Hello Vue!!';
+                },
+                updated: function() { // 데이터가 변경되고 난 후...
+                    console.log("update");
+                    this.message = 'Hello Vue!!!';
+                },
+                beforeDestroy: function() { // 데이터가 삭제되기 전...
+                    console.log("beforeDestroy");
+                },
+                destroy: function() { // 데이터가 삭제되고 난 후...
+                    console.log("destroy");
+                }
+             });
+        </script>
+
+    </body>
+</html>
