@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>Component Get Event</title>
+        <meta charset="utf-8">
+
+    </head>
+
+    <body>
+        <!-- View (DOM) --> 
+        <div id="app">
+            <p>{{ message }}</p>
+            <test1></test1>
+            <test2></test2>
+        </div>
+
+
+        <!-- View Model (Vue.js) -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+        
+        <!-- Model (JavaScript) -->
+        <script>
+            // 이벤트 버스 (Hub)
+            var eventBus = new Vue();
+
+            // 하위 컴포넌트 1
+            Vue.component('test1', {
+                template: '<button v-on:click="console1">test1</button>',
+                methods: {
+                    console1: function() {
+                        console.log("Test1 - Methods");
+                        var t1_Data = 100;
+                        var t2_Data = 200;
+                        eventBus.$emit('eventHub', t1_Data, t2_Data);
+                    }
+                }
+            })
+
+             // 하위 컴포넌트 2
+             Vue.component('test2', {
+                template: '<button v-on:click="console2">test2</button>',
+                methods: {
+                    console2: function() {
+                        console.log("Test2 - Methods");
+                        eventBus.$emit('eventHub', 100, 200);
+                    }
+                }
+            })
+
+            // 상위 컴포넌트
+            new Vue({
+                el: '#app',
+                data: {
+                    message: "Component Get Event => "
+                },
+                created: function() {
+                    eventBus.$on('eventHub', function(a, b) {
+                        alert("각 컴포넌트의 데이터 합계는 " + (a + b) + "입니다.");
+                        console.log("각 컴포넌트의 데이터 합계는 " + (a + b) + "입니다.");
+                    });
+                }
+            })
+
+            // eventBus만 있다면, 데이터 송수신에 두려울 것이 없을 것..!
+        </script>
+    </body>
+</html>

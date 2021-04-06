@@ -12,7 +12,8 @@
       <child-component v-bind:propsdata="message"></child-component>
 
       <!-- #할일 3 -->
-      <!-- sibling-component 등록 -->
+      <!-- sibling-component 등록 --> <!-- 여기서는 속성에 대문자가 포함되도 상관없지만, Js에서는 안된다. -->
+      <sibling-component v-bind:anotherMessage="message"></sibling-component>
     </div>
 
     <script src="js/vendor/vue.js"></script>

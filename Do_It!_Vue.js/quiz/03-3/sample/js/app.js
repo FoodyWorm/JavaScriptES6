@@ -1,5 +1,9 @@
 // 할일 #1
 // sibling-component 를 이름으로 갖는 새로운 컴포넌트를 아래에 등록해보세요.
+Vue.component('sibling-component', {
+  props: ['anothermessage'],
+  template: '<p>Sibing-component: {{ anothermessage }}</p>'
+})
 // options : template, props
 
 Vue.component('child-component', {
@@ -17,3 +21,4 @@ var app = new Vue({
     // 새로 지정한 data 속성은 위 sibling-component에 props로 전달합니다.
   }
 });
+ 

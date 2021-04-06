@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>Component Get Event</title>
+        <meta charset="utf-8">
+
+    </head>
+
+    <body>
+        <!-- View (DOM) --> 
+        <div id="app">
+            {{ message }} <br /><br />
+            <test v-on:event_1="parentMethods"></test>
+        </div>
+
+
+        <!-- View Model (Vue.js) -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+        
+        <!-- Model (JavaScript) -->
+        <script>
+            Vue.component('test', {
+                template: '<button v-on:click="event1">Start Methods!!!</button>',
+                methods: {
+                    event1: function() {
+                        this.$emit('event_1');
+                    } 
+                }
+            })
+           // Vue.js의 에러는 100% 문법 혹은 오류로 인한 것 이다. 눈을 잘 뜨고 살펴보자...
+           // 이렇게 귀찮게 통신하지 않도록 해주는 것이, 바로 Event Bus~!
+           
+           new Vue({
+                el: '#app',
+                data: {
+                    message: '- Component Get Event -'
+                },
+                methods: {
+                    parentMethods: function() {
+                        console.log("Parent Methods가 실행되었습니다.");
+                        alert("Parent Methods가 실행되었습니다.");
+                    }
+                }
+           })
+
+        </script>
+    </body>
+</html>

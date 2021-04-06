@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>Component Relationship & Get Data</title>
+        <meta charset="utf-8">
+
+    </head>
+
+    <body>
+        <!-- View (DOM) --> 
+        <div id="app">
+            <!-- 자식태그가 v-bind:propsdata로 데이터 요청을 한다. ="message"가 있냐고 -->
+            <!-- 자식이 부모에게 데이터를 전달할 때는, 이벤트 버스를 사용한다 -->
+            <test v-bind:propsdata="message"></test>
+        </div>
+
+
+        <!-- View Model (Vue.js) -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+        
+        <!-- Model (JavaScript) -->
+        <script>
+            // Vue.js의 속성 이름은 소문자로 해야한다. 안그러면, 경고가 발생한다.
+            Vue.component('test', {
+                props: ['propsdata'],
+                template: '<p>PropsData: {{ propsdata }}</p>'
+                
+            })
+
+
+            new Vue({
+                el: '#app',
+                data: {
+                    message: "ㅎㅇ?"
+                }
+            });
+
+        </script>
+    </body>
+</html>
