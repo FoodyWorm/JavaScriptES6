@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Vue Router</title>
+
+    </head>
+
+    <body>
+        <!-- View (DOM) --> 
+        <div id="app">
+        <h1>Vue Router</h1>
+        <p>
+            <!-- form & submit 같은 영역(?) -->
+            <router-link to="/main">Main</router-link>
+            <router-link to="/login"><button>Login</button></router-link>
+        </p>
+        
+        <!-- ifream 같은 영역(?) -->
+        <router-view></router-view>
+        </div>
+
+        <!-- View Model (Vue.js) -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+        <!-- 라우터 CDN 추가 -->
+        <script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
+        
+        <!-- Model (JavaScript) -->
+        <script>
+        // 컴포넌트 정의
+        var Main = { template: '<div>main</div>' }
+        var Login = { template: '<div>login</div>' }
+
+        // 라우터에 각 요청에 해당되는 URL과 일치하는 컴포넌트를 응답하도록 정의
+        var routes = [
+            { path: '/main', component: Main },
+            { path: '/login', component: Login }
+        ];
+
+        // 뷰 라우터 인스턴스 생성과 동시에 라우터를 적용 
+        var router = new VueRouter({
+            mode: 'history',
+            routes
+        });
+
+        // 완성된 라우터를 뷰 인스턴스에 적용. 
+        var app = new Vue({
+            router
+        }).$mount('#app'); // 이건 또 무슨 문구람..???;;
+        // 마운트가 되고나서 인스턴스를 부착하라는 건가..?
+        // 음.. 안쪽에 el로 부착하게되면.. 아니 애초에 router와 순서만 바꾸면 되지않나?
+        // 테스트 해봐야겠다.
+        // 아오.. 그놈의 대소문자..
+        // 프레임워크를 일반 Visual Studio로 학습하니.. 지옥이다.
+        // 와... routers를 routes로 바꿨더니 오류가 해결됬다.. 하하
+        // ;;;;
+        
+        
+
+        </script>
+    </body>
+</html>
