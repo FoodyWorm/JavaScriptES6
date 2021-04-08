@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>JavaScript Expression Formula</title>
+
+    </head>
+
+    <body>
+        <!-- View (DOM) --> 
+        <div id="app">
+            <h1>JavaScript Expression Formula</h1>
+            <h3>Basic Test</h3>
+            <p>{{ message }}</p>
+            <p>{{ message + "!!!"}}</p>
+            <p>{{ message.split('').reverse().join('') }}</p><br />
+
+            <h3>Split Test</h3>
+            <p>{{ message.split('') }}</p> <!-- String 객체에 공백이 없다면, 문자열로 나눠라 -->
+            <p>{{ message.split(' ') }}</p> <!-- String 객체에 공백이 1개 이상 생기면, 문자열로 나눠라 -->
+            <p>{{ message.split('   ') }};</p> <!-- String 객체에 공백이 2개 이상 생기면, 문자열로 나눠라 -->
+            <!-- 문자열로 나눠지지 않는 String객체는 모두 합쳐진다. 만약, 기준을 공백이아니라 'a'로 해놓는다면, a가 생기면 문자열로 나누게 될 것이다. --><br />
+
+            <h3>Reverse Test</h3>
+            <p>{{ message.split(' ').reverse() }}</p> <!-- reverse()는 배열의 순서를 모두 반대로 바꾸고 저장하는 함수이다. --><br />
+
+            <h3>Join Test</h3>
+            <p>{{ message.split(' ').reverse().join() }}</p> <!-- join()은 배열의 모든 요소를 연결해 -> 하나의 문자열로 만든다.-->
+            <p>{{ message.split(' ').reverse().join(' ') }}</p> <!-- 이 연결하는 기준 또한, 인자를 추가하여 만들 수 있는 것 같다. -->
+            <p>{{ message.split(' ').reverse().join('  ') }}</p> <!-- 아닌가..? --><br />
+        </div>
+
+        <!-- View Model (Vue.js) -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+
+        <!-- Model (JavaScript) -->
+        <script>
+            new Vue({
+                el: '#app',
+                data: {
+                    message: "That's too hard"
+                }
+            })
+        </script>
+    </body>
+</html>

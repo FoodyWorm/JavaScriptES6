@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Precautions JavaScript Expression</title>
+
+    </head>
+
+    <style>
+        body {
+            padding-left: 25px;
+        }
+
+    </style>
+
+    <body>
+        <!-- View (DOM) --> 
+        <div id="app">
+            <h1>Precautions JavaScript Expression</h1>
+            <!-- {{ var a =10; }}  X, 선언문은 사용 불가능 -->
+            <!--{{ if(true) { return 100 } }}  X, 분기 구문은 사용 불가능 -->
+            삼항 연사자: {{ true ? 100 : 0 }} <!-- O, 삼항 연산자는 표현 가능 --><br />
+
+            복잡한 연산자: {{ message.split(' ').reverse().join(' ') }} <!-- X, 복잡한 연산은 인스턴스 안에서 수행 --><br />
+            복잡한 연산자 computed 안에서 : {{ reversedMessage }} <!-- O, 스크립트에서 computed 속성으로 계산한 후 최종 값만 표현 -->
+        </div>
+
+        <!-- View Model (Vue.js) -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+
+        <!-- Model (JavaScript) -->
+        <script>
+            new Vue({
+                el: '#app',
+                data: {
+                    message: "Precautions JavaScript Expression",
+                    
+                },
+                computed: {
+                    reversedMessage: function() {
+                        return this.message.split('').reverse().join('');
+                    }
+                }
+            });
+         
+        </script>
+    </body>
+</html>

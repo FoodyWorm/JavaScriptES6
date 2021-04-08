@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Vue v-bind</title>
+
+    </head>
+
+    <style>
+        #ID10 {
+            color:red;
+        }
+
+        .container {
+            color:blue;
+        }
+    </style>
+
+    <body>
+        <!-- View (DOM) --> 
+        <div id="app" v-once>
+            <h1>Vue v-bind</h1>
+            <div v-bind:id="id1">아이디 바인딩</div>
+            <div v-bind:class="class1">클래스 바인딩</div>
+            <div v-bind:style="style1">스타일 바인딩</div>
+            
+        </div>
+
+        <!-- View Model (Vue.js) -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+
+        <!-- Model (JavaScript) -->
+        <script>
+            new Vue({
+                data: {
+                    id1: 'ID10',
+                    class1: 'container',
+                    style1: 'color: yellow'
+                    
+                }
+            }).$mount('#app');
+        </script>
+    </body>
+</html>
