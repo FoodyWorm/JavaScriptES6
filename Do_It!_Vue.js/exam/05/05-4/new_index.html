@@ -11,18 +11,62 @@
         body {
             padding-left: 25px;
         }
+
+        .classFor {
+            text-shadow: black;
+            size: 20px;
+            background-color: cornflowerblue;
+        }
+        #vueId {
+            color:brown;
+        }
     </style>
 
     <body>
         <!-- View (DOM) --> 
-        <h1>Vue Directive</h1>
+        
+        <div id="app">
+            <!-- v-on: / v-if / v-show -->
+            <h1 v-on:mouseover="hide"> Vue Directive</h1>
+            <h3 v-if="flag">Do if! Vue.js</h3>
+            <h3 v-show="flag">Do show! Vue.js</h3>
 
+            <!-- v-for / v-bind: -->
+            <ul>
+                <li v-for="system in systems">{{ system }}</li>
+            </ul>
+
+            <!-- v-bind:id -->
+            <div v-bind:id="vueId">Hello? Vue.js</div>
+        </div>
         <!-- View Model (Vue.js) -->
         <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
 
         <!-- Model (JavaScript) -->
         <script>
-            
+            new Vue({
+                el: '#app',
+                data: {
+                    flag: true,
+                    systems: ['First', 'Seconds', 'Third'],
+                    vueId: "vueId"
+                },
+                methods: {
+                    hide: function() {
+                        console.log(this.flag);
+                        if(this.flag == true) { this.flag = false; }
+                        else if(this.flag == false) { this.flag = true; }
+                        console.log(this.flag);
+                        // =_=;; 숨겨지면 클릭 할 수 없었지... ㅎ허허
+                        // 그렇다면, 클릭 이벤트가 아니라 마우스 커서 ON 이벤트도 가능한가?
+                        // 오.. 찾아보니까 있다! mouseover..! 그런데..
+                        // show는 분명 완전히 요소를 삭제하지는 않는다고 했는데.. 왜 어째서지 왜 이벤트를 실행할 수 없지?
+                        // 내가 이걸로 게임을 만들것도 아닌데.. 그냥 넘어가자. 그냥, 보이지 않게 하는 것은 이벤트 함수 조차도 실행하지 못하게 하는 것으로 판단.
+                        // 무엇보다 굳이 저렇게 코드를 짜게 될 일도 없다. 복잡해지니까.
+                        // ??? if로 바꿔도 요소가 사라지지 않는다..?? 뭐야..; 그럼 if랑 show랑 뭔차이지..
+                    }
+                }
+            })
         </script>
     </body>
 </html>
