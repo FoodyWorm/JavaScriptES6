@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>Send Argument</title>
+        
+    </head>
+
+    <style>
+        body {
+            padding-left: 25px;
+        }
+
+    </style>
+
+    <body>
+        <!-- View (DOM) --> 
+        <div id="app">
+            <!-- -->
+            <h1> Send Argument </h1>
+            <button v-on:click="btn1(10)">인자넘겨보리기</button>
+        
+        </div>
+        
+        
+        <!-- View Model (Vue.js) -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+
+        <!-- Model (JavaScript) -->
+        <script>
+            new Vue({
+                el: '#app',
+                methods: {
+                    btn1: function(a) {
+                        alert("넘겨받은 인자값: " + a);
+                    }
+                }
+                
+                })
+        </script>
+    </body>
+</html>

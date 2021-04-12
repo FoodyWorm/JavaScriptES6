@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>Vue Watch</title>
+        
+    </head>
+
+    <style>
+        body { padding-left: 25px; }
+
+    </style>
+
+    <body>
+        <!-- View (DOM) --> 
+        <div id="app">
+            <!-- Vue Watch -->
+            <h1> Vue Watch </h1>
+            <input v-model="message">
+        
+        </div>
+        
+        
+        <!-- View Model (Vue.js) -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+
+        <!-- Model (JavaScript) -->
+        <script>
+            new Vue({
+                el: '#app',
+                data: {
+                    message: "Hello Vue.js!"
+                },
+                watch: {
+                    message: function(data) {
+                        console.log("Message의 값 변경: " + data);
+                        alert("Message의 값 변경: " + data);
+                    
+                    }
+                }
+                
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>Event Data</title>
+        
+    </head>
+
+    <style>
+        body {
+            padding-left: 25px;
+        }
+
+    </style>
+
+    <body>
+        <!-- View (DOM) --> 
+        
+        <div id="app">
+            <!-- Event Data -->
+            <h1> Event Data </h1>
+            <button v-on:click="btn1">{{ Click_Btn1 }}</button>
+        </div>
+        
+        
+        <!-- View Model (Vue.js) -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+
+        <!-- Model (JavaScript) -->
+        <script>
+            new Vue({
+                el: '#app',
+                data: {
+                    Click_Btn1: "클릭하면..!"
+                },
+                methods: {
+                    btn1: function(event) {
+                        console.log(event);
+                    }
+                }
+                })
+        </script>
+    </body>
+</html>

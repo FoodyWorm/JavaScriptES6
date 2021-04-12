@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>Vue Dirctive -> v-on:click=""</title>
+        
+    </head>
+
+    <style>
+        body {
+            padding-left: 25px;
+        }
+
+    </style>
+
+    <body>
+        <!-- View (DOM) --> 
+        
+        <div id="app">
+            <!-- v-on:click="" -->
+            <h1> Vue Directive -> v-on:click="" </h1>
+            <button v-on:click="btn1">클릭해보랑께</button>  
+        </div>
+        
+        
+        <!-- View Model (Vue.js) -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+
+        <!-- Model (JavaScript) -->
+        <script>
+            new Vue({
+                el: '#app',
+                methods: {
+                    btn1: function() {
+                        alert("클릭하면 이렇게 된당께");
+                    }
+                }
+                
+                })
+        </script>
+    </body>
+</html>

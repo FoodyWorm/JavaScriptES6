@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>computed or methods</title>
+        
+    </head>
+
+    <style>
+        body { padding-left: 25px; }
+    </style>
+
+    <body>
+        <!-- View (DOM) --> 
+        <div id="app">
+            <!-- computed or methods -->
+            <h1> computed or methods </h1>
+            <p>{{ message }}</p>
+            <!-- <button v-on:click="btn1">메소드 버튼</button> -->
+            <button v-on:click="btn2">컴퓨티드 버튼</button>
+        </div>
+        
+        <!-- View Model (Vue.js) -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+
+        <!-- Model (JavaScript) -->
+        <script>
+            new Vue({
+                el: '#app',
+                data: {
+                    message: 'Hello Vue.js!'
+                },
+                methods: {
+                    btn1: function() {
+                        this.message = this.message.split('').reverse().join('');
+                        return this.message;
+                    }
+                },
+                computed: {
+                    btn2: function() {
+                        this.message = this.message.split('').reverse().join('');
+                        return this.message;
+                    }
+                }
+                
+                })
+
+            // 정확한 차이점은 잘 모르겠으나... 확실한 것은
+            // 컴퓨티드로 작성한 함수는 선적용된다는 것 이다. 캐싱 기능덕인듯
+            // 그리고 버튼을 눌러서 한번 더 함수를 실행하면 오류가 생긴다.
+            // 결론: 그냥 메소드 쓰자.. ㅎㅎ 굳이 쓴다면, 방대한 양의 반복수행을 할 경우일 것 같다.
+        </script>
+    </body>
+</html>
