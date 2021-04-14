@@ -1,7 +1,7 @@
 <template>
 <div>
-    <input class="typingBox" type="text" v-model="newTodoItem" placeholder=" Typing here... Your Scedules!" v-on:keyup.enter="addTodo">
-    <span class="addContainer" v-on:click="addTodo">
+    <input class="typingBox shadow" type="text" v-model="newTodoItem" placeholder=" Typing here... Your Scedules!" v-on:keyup.enter="addTodo">
+    <span class="addContainer shadow" v-on:click="addTodo">
         <i class="addBtn fa fa-plus" aria-hidden="true"></i>
     </span>
 </div>
@@ -18,12 +18,20 @@ export default {
         addTodo() {
             if (this.newTodoItem !== "") {
                 var value = this.newTodoItem.trim();
-                localStorage.setItem(value, value);
                 console.log("저장된 값: " + this.newTodoItem);
+                this.$emit('inputData', value);
                 this.clearText();
             }
             else {
-                alert("아무런 값도 입력하지 않으셨습니다.");
+                //alert("아무런 값도 입력하지 않으셨습니다.");
+                // Sweet Alert
+                Swal.fire({
+                    title: 'Error!',
+                    text: "You didn't type!",
+                    icon: 'error',
+                    confirmButtonText: '확인'
+                })
+                
             }
         },
         clearText() {

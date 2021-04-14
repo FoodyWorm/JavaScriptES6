@@ -1,8 +1,8 @@
 <template>
     <section id="list-Box">
-        <ul>
+        <transition-group name="list" tag="ul">
             <!-- List -->
-            <li v-bind:key="todoItem" v-for="(todoItem, index) in todoItems" class="shadow">
+            <li v-bind:key="todoItem" v-for="(todoItem, index) in listdata" class="shadow">
                 <!-- Check Button -->
                 <i class="checkBtn fa fa-check" aria-hidden="true"></i>
 
@@ -15,33 +15,23 @@
                 </span>
             </li>
 
-        </ul>
+        </transition-group>
     </section>
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            todoItems: []
-        }
-    },
-    created() {
-        if (localStorage.length > 0) {
-            for (var i=0; i<localStorage.length; i++) {
-                this.todoItems.push(localStorage.key(i));
-            }
-        }
-    },
+    props: ['listdata'],
     methods: {
-        removeTodo(todoItem, index) {
-            console.log(todoItem, index);
-            localStorage.removeItem(todoItem); // 왜...이지?
-            this.todoItems.splice(index, 1); // 이 2개의 부분은 이해가 안된다..
+        removeTodo(listdata, index) {
+            console.log(listdata, index);
+            localStorage.removeItem(listdata); // 로컬 스토리지에 해당되는 값을 삭제
+            this.listdata.splice(index, 1); // todoItems의 해당 칸부터 값을 1개 삭제
         }
     }
-    
 }
+
+
 </script>
 
 <style scoped>
@@ -79,6 +69,23 @@ export default {
         margin-left: auto;
         margin-right: 20px;
         color: #de4343;
+    }
+    .list-item {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .list-move {
+        transition: transform 1s;
+    }
+
+    .list-enter-active, .list-leave-active {
+        transition: all 1s;
+    }
+
+    .list-enter, .list-leave-to {
+        opacity: 0;
+        transition: translateY(30px);
     }
 
 </style>
