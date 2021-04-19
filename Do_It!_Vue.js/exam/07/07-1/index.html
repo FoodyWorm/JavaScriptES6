@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>Class & Style - Binding</title>
+    </head>
+    <bdoy>
+        <!------------------------------------------------------------------------------------------------------------->
+        <!-- (7) Vuex Test   -->
+        <h1> Vuex Test </h1>
+        <div id="app">
+            <h3>{{ count }}</h3>
+            <button v-on:click="plus">+</button>
+            <button v-on:click="minus">-</button>
+        </div>
+
+
+        <!------------------------------------------------------------------------------------------------------------->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script>
+
+            new Vue({
+                el: '#app',
+                data: {
+                    count: 0
+                },
+                methods: {
+                    plus() {
+                        console.log("+");
+                        this.count++
+
+                    },
+                    minus() {
+                        console.log("-");
+                        this.count--
+
+                    }
+                }
+            })
+
+        </script>
+    </bdoy>
+</html>
