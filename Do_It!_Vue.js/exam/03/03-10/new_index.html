@@ -21,7 +21,7 @@
         <!-- Model (JavaScript) -->
         <script>
             // 이벤트 버스 (Hub)
-            var eventBus = new Vue();
+            var Events = new Vue();
 
             // 하위 컴포넌트 1
             Vue.component('test1', {
@@ -31,7 +31,7 @@
                         console.log("Test1 - Methods");
                         var t1_Data = 100;
                         var t2_Data = 200;
-                        eventBus.$emit('eventHub', t1_Data, t2_Data);
+                        Events.$emit('eventHub', t1_Data, t2_Data);
                     }
                 }
             })
@@ -42,7 +42,7 @@
                 methods: {
                     console2: function() {
                         console.log("Test2 - Methods");
-                        eventBus.$emit('eventHub', 100, 200);
+                        Events.$emit('eventHub', 100, 200);
                     }
                 }
             })
@@ -54,7 +54,7 @@
                     message: "Component Get Event => "
                 },
                 created: function() {
-                    eventBus.$on('eventHub', function(a, b) {
+                    Events.$on('eventHub', function(a, b) {
                         alert("각 컴포넌트의 데이터 합계는 " + (a + b) + "입니다.");
                         console.log("각 컴포넌트의 데이터 합계는 " + (a + b) + "입니다.");
                     });
